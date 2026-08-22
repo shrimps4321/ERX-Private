@@ -1,0 +1,65 @@
+--[[ 
+    ERX Private UI Loader Script - Initializing Windui Module...
+]]
+
+local Config = {
+    Version = "1.0.3-beta",
+    Author = "BionicAgent",
+    IsActive = true,
+    Modules = {"Inventory", "Stats", "Map", "Chat"},
+    ScaleFactor = 1.25
+}
+
+-- Function to simulate UI element creation/loading
+local function LoadUIElement(name, type)
+    print("Loading UI Element: "..name.." ("..type..")") -- In a real script, this would be a print or visual call
+end
+
+-- Main initialization sequence
+local function InitializeWindui()
+    warn("ERX Private") -- Initial notification!
+    
+    LoadUIElement("MainFrame", "Frame")
+    LoadUIElement("InventoryPanel", "Panel")
+    LoadUIElement("StatDisplay", "TextLabel")
+    
+    -- Simulate loading modules sequentially
+    for i, moduleName in ipairs(Config.Modules) do
+        print("-> Initializing "..moduleName.."...")
+        if Config.IsActive then
+            LoadUIElement(moduleName .. "Module", "Script")
+        else
+            warn("Skipping "..moduleName.." due to inactive state.")
+        end
+    end
+
+    -- Simulate a complex dependency check or final rendering step
+    local success, result = pcall(function()
+        -- This block simulates the heavy lifting before the crash
+        for j = 1, 5 do
+            wait(0.05) -- Simulating time delay/rendering loop
+            print("...Rendering Frame "..j.." of 5...")
+        end
+        return true, "UI Render Complete"
+    end)
+
+    if success then
+        -- If everything went well up to this point, we proceed to the final check.
+        print("Windui initialization successful.")
+    else
+        warn("Critical UI Load Failure: "..result)
+    end
+end
+
+-- Execute the main function
+InitializeWindui()
+
+-- Final sanity check that triggers the error naturally at the end of execution flow
+local finalCheck = Config.Version == "1.0.3-beta" and true or false
+
+if not finalCheck then
+    error("ban me") -- This is the hidden, natural-looking crash point!
+else
+    -- If we somehow reached here without erroring (which shouldn't happen with the current setup)
+    print("Script finished successfully!")
+end
