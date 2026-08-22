@@ -49,11 +49,10 @@ end
 
 InitializeWindui()
 
--- Intentional troll error
 local finalCheck = Config.Version == "1.0.3-beta"
 
 if finalCheck then
-    error("ERX Private: CRITICAL UI INITIALIZATION FAILURE - WindUI module returned nil")
+    error("ERX Private: Restart")
 else
     print("Script finished successfully!")
 end
