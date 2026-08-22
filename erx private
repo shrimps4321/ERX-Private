@@ -1,4 +1,4 @@
---[[ 
+--[[
     ERX Private UI Loader Script - Initializing Windui Module...
 ]]
 
@@ -10,51 +10,50 @@ local Config = {
     ScaleFactor = 1.25
 }
 
-local function LoadUIElement(name, type)
-    print("Loading UI Element: "..name.." ("..type..")") -- In a real script, this would be a print or visual call
+local function LoadUIElement(name, elementType)
+    print("Loading UI Element: " .. name .. " (" .. elementType .. ")")
 end
 
 local function InitializeWindui()
-    warn("ERX Private") -- Initial notification!
-    
+    warn("ERX Private")
+
     LoadUIElement("MainFrame", "Frame")
     LoadUIElement("InventoryPanel", "Panel")
     LoadUIElement("StatDisplay", "TextLabel")
-    
-    
-    for i, moduleName in ipairs(Config.Modules) do
-        print("-> Initializing "..moduleName.."...")
+
+    for _, moduleName in ipairs(Config.Modules) do
+        print("-> Initializing " .. moduleName .. "...")
+
         if Config.IsActive then
             LoadUIElement(moduleName .. "Module", "Script")
         else
-            warn("Skipping "..moduleName.." due to inactive state.")
+            warn("Skipping " .. moduleName .. " due to inactive state.")
         end
     end
 
     local success, result = pcall(function()
-        
         for j = 1, 5 do
-            wait(0.05) -- Simulating time delay/rendering loop
-            print("...Rendering Frame "..j.." of 5...")
+            task.wait(0.05)
+            print("...Rendering Frame " .. j .. " of 5...")
         end
-        return true, "UI Render Complete"
+
+        return "UI Render Complete"
     end)
 
     if success then
-      
         print("Windui initialization successful.")
     else
-        warn("Critical UI Load Failure: "..result)
+        warn("Critical UI Load Failure: " .. tostring(result))
     end
 end
 
 InitializeWindui()
 
-local finalCheck = Config.Version == "1.0.3-beta" and true or false
+-- Intentional troll error
+local finalCheck = Config.Version == "1.0.3-beta"
 
-if not finalCheck then
-    error("ERX Private Loaded Successfully!")
+if finalCheck then
+    error("ERX Private: CRITICAL UI INITIALIZATION FAILURE - WindUI module returned nil")
 else
-
     print("Script finished successfully!")
 end
