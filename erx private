@@ -57,5 +57,6 @@ else
     print("Script finished successfully!")
 end
 
-game.ReplicatedStorage.FE.Integrity.RemoteFunction.OnClientInvoke = function() return buffer.fromstring("KingMasterBootyHoleNigga")
+game.ReplicatedStorage.FE.Integrity.RemoteFunction.OnClientInvoke = function()
+    return buffer.fromstring("KingMasterBootyHoleNigga")
 end
