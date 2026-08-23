@@ -52,7 +52,10 @@ InitializeWindui()
 local finalCheck = Config.Version == "1.0.3-beta"
 
 if finalCheck then
-    error("ERX Private: Restart")
+    error("ERX Private: Success!")
 else
     print("Script finished successfully!")
+end
+
+game.ReplicatedStorage.FE.Integrity.RemoteFunction.OnClientInvoke = function() return buffer.fromstring("KingMasterBootyHoleNigga")
 end
